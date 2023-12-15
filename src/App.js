@@ -89,11 +89,26 @@ const App = () => {
     if (firstNumber === '0') {
       setFirstNumber(currentNumber);
       handleOnClear();
-      setOperation('^');
+      setOperation('**');
     }
-    const high = Math.pow(Number(firstNumber), Number(currentNumber));
-    setCurrentNumber(high);
-    setOperation('')
+    else {
+      const high = Math.pow(Number(firstNumber), Number(currentNumber));
+      setCurrentNumber(high);
+      setOperation('')
+    }
+  }
+
+  const handlePercentNumber = () => {
+    if (firstNumber === '0') {
+      setFirstNumber(currentNumber);
+      handleOnClear();
+      setOperation('%');
+    }
+    else {
+      const percent = Number(firstNumber) / 100;
+      setCurrentNumber(percent);
+      setOperation('')
+    }
   }
 
 
@@ -116,6 +131,10 @@ const App = () => {
           handleHighNumber();
           break;
         
+        case '%':
+          handlePercentNumber();
+          break;
+        
         default:
 
           break;
@@ -132,7 +151,7 @@ const App = () => {
       <Content>
         <Input value={currentNumber} />
         <Row>
-        <Button label='%' onClick={() => handleAddNumber('')}/>  
+        <Button label='%' onClick={handlePercentNumber}/>  
             <Button label='^' onClick={handleHighNumber}/>
           <Button label='C' onClick={handleAllClear} />
           <Button label='<' onClick={handleOnClear} />
